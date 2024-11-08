@@ -3,19 +3,75 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #030712;
+  --foreground: #ffffff;
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glass-background: rgba(255, 255, 255, 0.02);
+  --glass-hover: rgba(255, 255, 255, 0.05);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer components {
+  /* Standardized glass effect */
+  .glass {
+    @apply backdrop-blur-lg border border-white/5 bg-white/[0.02];
+    box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
   }
+  
+  .glass-hover {
+    @apply hover:bg-white/[0.05] transition-all duration-300;
+  }
+
+  /* Card styles */
+  .card {
+    @apply glass rounded-xl p-6;
+  }
+  
+  /* Navigation item styles */
+  .nav-item {
+    @apply text-white/70 hover:text-white transition-colors duration-200;
+  }
+
+  /* Button styles */
+  .button-glass {
+    @apply glass glass-hover active:scale-[0.98] transition-all duration-200;
+  }
+}
+
+/* Clean up text shadows */
+h1, h2, h3, h4, h5, h6 {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  letter-spacing: -0.02em;
+}
+
+p {
+  text-shadow: none; /* Remove text shadow from paragraphs for better readability */
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /* Add a subtle gradient to create depth without harsh lines */
+  background-image: linear-gradient(
+    180deg,
+    #030712 0%,
+    #030712 100%
+  );
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Remove any existing divider styles */
+.divider {
+  display: none;
+}
+
+html {
+  overflow: hidden;
+}
+
+#__next {
+  height: 100vh;
+  overflow: hidden;
 }
